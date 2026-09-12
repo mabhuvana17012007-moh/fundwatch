@@ -1,0 +1,1009 @@
+/**
+ * CENTRALIZED DATASET FOR FUNDWATCH
+ * 
+ * Single Source of Truth for the entire application.
+ * All pages, tables, charts, map markers, and details derive directly from this synchronized dataset.
+ * 
+ * DISCLAIMER:
+ * DEMO / DERIVED DATA
+ * Sample data is used for demonstration and is not presented as official live MPLADS data.
+ */
+
+export const AGENCIES = [
+  {
+    id: 1,
+    original_name: "Maharashtra State Police Housing & Welfare Corp (MSPHC)",
+    normalized_name: "State Police Housing & Welfare Corporation",
+    state: "Maharashtra",
+    total_spending: 420.5,
+    avg_spending: 60.07,
+    median_spending: 45.2,
+    std_dev: 9.46,
+    spending_velocity: 4.2, // Accelerated spending
+    anomaly_count: 2,
+    risk_level: "Critical",
+    project_count: 3
+  },
+  {
+    id: 2,
+    original_name: "PWD Civil Wing, Karnataka",
+    normalized_name: "Public Works Department (PWD)",
+    state: "Karnataka",
+    total_spending: 680.0,
+    avg_spending: 42.5,
+    median_spending: 38.0,
+    std_dev: 6.8,
+    spending_velocity: 1.25,
+    anomaly_count: 2,
+    risk_level: "High",
+    project_count: 4
+  },
+  {
+    id: 3,
+    original_name: "District Rural Development Agency, Pune",
+    normalized_name: "District Rural Development Agency (DRDA)",
+    state: "Maharashtra",
+    total_spending: 310.0,
+    avg_spending: 31.0,
+    median_spending: 30.0,
+    std_dev: 4.1,
+    spending_velocity: 1.1,
+    anomaly_count: 1,
+    risk_level: "Medium",
+    project_count: 3
+  },
+  {
+    id: 4,
+    original_name: "Karnataka Rural Infrastructure Development Ltd (KRIDL)",
+    normalized_name: "Karnataka Rural Infrastructure Dev Ltd (KRIDL)",
+    state: "Karnataka",
+    total_spending: 540.0,
+    avg_spending: 45.0,
+    median_spending: 44.0,
+    std_dev: 7.2,
+    spending_velocity: 2.1,
+    anomaly_count: 1,
+    risk_level: "High",
+    project_count: 2
+  },
+  {
+    id: 5,
+    original_name: "Tamil Nadu Water Supply & Drainage Board (TWAD)",
+    normalized_name: "Tamil Nadu Water Supply & Drainage Board (TWAD)",
+    state: "Tamil Nadu",
+    total_spending: 490.0,
+    avg_spending: 37.69,
+    median_spending: 35.5,
+    std_dev: 5.3,
+    spending_velocity: 1.05,
+    anomaly_count: 0,
+    risk_level: "Low",
+    project_count: 3
+  },
+  {
+    id: 6,
+    original_name: "National Buildings Construction Corporation (NBCC India)",
+    normalized_name: "National Buildings Construction Corp (NBCC)",
+    state: "Delhi / Central",
+    total_spending: 820.0,
+    avg_spending: 68.33,
+    median_spending: 65.0,
+    std_dev: 8.1,
+    spending_velocity: 1.15,
+    anomaly_count: 1,
+    risk_level: "Medium",
+    project_count: 2
+  },
+  {
+    id: 7,
+    original_name: "Zilla Parishad Engineering Cell, Rajasthan",
+    normalized_name: "Zilla Parishad Engineering Division",
+    state: "Rajasthan",
+    total_spending: 275.0,
+    avg_spending: 27.5,
+    median_spending: 26.0,
+    std_dev: 3.8,
+    spending_velocity: 0.95,
+    anomaly_count: 0,
+    risk_level: "Low",
+    project_count: 3
+  }
+];
+
+export const PROJECTS = [
+  // 1. HERO CRITICAL ANOMALY PROJECT
+  {
+    id: 1,
+    work_id: "MPLADS-2024-MH-4011",
+    title: "Community Health Center Modernization & Trauma Care Unit",
+    state: "Maharashtra",
+    district: "Pune",
+    constituency: "Pune Parliamentary Constituency",
+    mp_name: "Hon. Murlidhar Mohol",
+    agency_id: 1,
+    agency_name: "State Police Housing & Welfare Corporation",
+    category: "Healthcare",
+    description: "Establishment of high-dependency trauma care ward, diagnostic radiology equipment, and 24x7 emergency backup facility.",
+    sanctioned_amount: 95.0,
+    released_amount: 90.0,
+    expenditure: 79.0, // Critical spike
+    physical_progress: 48.0, // 48% progress vs 83% financial utilization
+    status: "Under Scrutiny",
+    completion_date: "2024-12-31",
+    latitude: 18.5204,
+    longitude: 73.8567,
+    risk_level: "Critical",
+    anomaly_score: 92.0
+  },
+  // 2. High Risk Project
+  {
+    id: 2,
+    work_id: "MPLADS-2024-KA-1082",
+    title: "Solar-Powered Drinking Water Grid & RO Purification Hub",
+    state: "Karnataka",
+    district: "Bengaluru Rural",
+    constituency: "Bengaluru Rural",
+    mp_name: "Hon. Dr. C. N. Manjunath",
+    agency_id: 4,
+    agency_name: "Karnataka Rural Infrastructure Dev Ltd (KRIDL)",
+    category: "Water Supply",
+    description: "Installation of 15 solar-powered automated water dispensing units and reverse osmosis filtration plants across 4 taluks.",
+    sanctioned_amount: 75.0,
+    released_amount: 70.0,
+    expenditure: 64.5,
+    physical_progress: 55.0,
+    status: "Ongoing",
+    completion_date: "2025-02-28",
+    latitude: 13.0827,
+    longitude: 77.5877,
+    risk_level: "High",
+    anomaly_score: 76.5
+  },
+  // 3. High Risk Project
+  {
+    id: 3,
+    work_id: "MPLADS-2024-MH-2034",
+    title: "Smart Anganwadi & Early Childhood Nutrition Resource Hubs",
+    state: "Maharashtra",
+    district: "Nagpur",
+    constituency: "Nagpur",
+    mp_name: "Hon. Nitin Gadkari",
+    agency_id: 1,
+    agency_name: "State Police Housing & Welfare Corporation",
+    category: "Education",
+    description: "Construction and digitization of 8 model preschool Anganwadi centers equipped with biometric attendance and modular kitchens.",
+    sanctioned_amount: 60.0,
+    released_amount: 55.0,
+    expenditure: 51.0,
+    physical_progress: 62.0,
+    status: "Ongoing",
+    completion_date: "2024-11-30",
+    latitude: 21.1458,
+    longitude: 79.0882,
+    risk_level: "High",
+    anomaly_score: 68.0
+  },
+  // 4. Medium Risk Project
+  {
+    id: 4,
+    work_id: "MPLADS-2024-KA-3045",
+    title: "Bridge & Approach Road Over Vrishabhavathi Channel",
+    state: "Karnataka",
+    district: "Bengaluru Urban",
+    constituency: "Bengaluru South",
+    mp_name: "Hon. Tejasvi Surya",
+    agency_id: 2,
+    agency_name: "Public Works Department (PWD)",
+    category: "Roads & Infrastructure",
+    description: "Construction of concrete box culvert bridge and 1.8km bitumen approach road for peri-urban agricultural transit.",
+    sanctioned_amount: 85.0,
+    released_amount: 80.0,
+    expenditure: 61.2,
+    physical_progress: 70.0,
+    status: "Ongoing",
+    completion_date: "2025-01-15",
+    latitude: 12.9716,
+    longitude: 77.5946,
+    risk_level: "Medium",
+    anomaly_score: 54.0
+  },
+  // 5. Medium Risk Project
+  {
+    id: 5,
+    work_id: "MPLADS-2024-DL-5099",
+    title: "Vocational Skill Training Complex & Digital Computer Lab",
+    state: "Delhi / Central",
+    district: "New Delhi",
+    constituency: "New Delhi",
+    mp_name: "Hon. Bansuri Swaraj",
+    agency_id: 6,
+    agency_name: "National Buildings Construction Corp (NBCC)",
+    category: "Education",
+    description: "Upgradation of municipal youth center with 60 terminal high-speed computer labs and renewable rooftop photovoltaic setup.",
+    sanctioned_amount: 120.0,
+    released_amount: 110.0,
+    expenditure: 94.0,
+    physical_progress: 75.0,
+    status: "Ongoing",
+    completion_date: "2024-10-31",
+    latitude: 28.6139,
+    longitude: 77.2090,
+    risk_level: "Medium",
+    anomaly_score: 48.5
+  },
+  // 6. Low Risk Project
+  {
+    id: 6,
+    work_id: "MPLADS-2024-TN-6101",
+    title: "Desalination & Brackish Water Piping Network, Cuddalore",
+    state: "Tamil Nadu",
+    district: "Cuddalore",
+    constituency: "Cuddalore",
+    mp_name: "Hon. M. K. Vishnu Prasad",
+    agency_id: 5,
+    agency_name: "Tamil Nadu Water Supply & Drainage Board (TWAD)",
+    category: "Water Supply",
+    description: "Underground HDPE pipeline extension connecting coastal desalination facility to 12 inland village clusters.",
+    sanctioned_amount: 90.0,
+    released_amount: 85.0,
+    expenditure: 58.0,
+    physical_progress: 82.0,
+    status: "Ongoing",
+    completion_date: "2025-03-15",
+    latitude: 11.7480,
+    longitude: 79.7714,
+    risk_level: "Low",
+    anomaly_score: 18.0
+  },
+  // 7. Low Risk Project
+  {
+    id: 7,
+    work_id: "MPLADS-2024-RJ-7012",
+    title: "Rural Rainwater Harvesting & Community Check Dam Construction",
+    state: "Rajasthan",
+    district: "Jaipur Rural",
+    constituency: "Jaipur Rural",
+    mp_name: "Hon. Rao Rajendra Singh",
+    agency_id: 7,
+    agency_name: "Zilla Parishad Engineering Division",
+    category: "Water Supply",
+    description: "Masonry check dam and desiltation basin across dry seasonal catchment to replenish local groundwater aquifer tables.",
+    sanctioned_amount: 45.0,
+    released_amount: 45.0,
+    expenditure: 38.2,
+    physical_progress: 95.0,
+    status: "Completed",
+    completion_date: "2024-06-30",
+    latitude: 26.9124,
+    longitude: 75.7873,
+    risk_level: "Low",
+    anomaly_score: 12.0
+  },
+  // 8. Low Risk Project
+  {
+    id: 8,
+    work_id: "MPLADS-2024-MH-8022",
+    title: "Solid Waste Decentralized Biomethanation Plant",
+    state: "Maharashtra",
+    district: "Thane",
+    constituency: "Kalyan",
+    mp_name: "Hon. Dr. Shrikant Shinde",
+    agency_id: 3,
+    agency_name: "District Rural Development Agency (DRDA)",
+    category: "Sanitation",
+    description: "5 metric ton per day anaerobic digestion facility converting market organic waste into compressed biogas and bio-fertilizer.",
+    sanctioned_amount: 70.0,
+    released_amount: 65.0,
+    expenditure: 42.0,
+    physical_progress: 68.0,
+    status: "Ongoing",
+    completion_date: "2025-04-30",
+    latitude: 19.2403,
+    longitude: 73.1305,
+    risk_level: "Low",
+    anomaly_score: 22.0
+  },
+  // 9. Low Risk Project
+  {
+    id: 9,
+    work_id: "MPLADS-2024-TN-9031",
+    title: "Sub-Divisional Hospital Dialysis Wing & Power Backup",
+    state: "Tamil Nadu",
+    district: "Coimbatore",
+    constituency: "Coimbatore",
+    mp_name: "Hon. Ganapathi P. Rajkumar",
+    agency_id: 5,
+    agency_name: "Tamil Nadu Water Supply & Drainage Board (TWAD)",
+    category: "Healthcare",
+    description: "10-bed subsidized hemodialysis suite with automated water treatment system and continuous solar hybrid inverter system.",
+    sanctioned_amount: 80.0,
+    released_amount: 80.0,
+    expenditure: 72.0,
+    physical_progress: 90.0,
+    status: "Ongoing",
+    completion_date: "2024-09-30",
+    latitude: 11.0168,
+    longitude: 76.9558,
+    risk_level: "Low",
+    anomaly_score: 15.0
+  },
+  // 10. Low Risk Project
+  {
+    id: 10,
+    work_id: "MPLADS-2024-KA-1144",
+    title: "Rural Community Library & Digital E-Learning Knowledge Kiosks",
+    state: "Karnataka",
+    district: "Mysuru",
+    constituency: "Mysuru",
+    mp_name: "Hon. Yaduveer Krishnadatta Chamaraja Wadiyar",
+    agency_id: 2,
+    agency_name: "Public Works Department (PWD)",
+    category: "Public Amenities",
+    description: "Construction of two-story library complex with dedicated reading rooms and 20 multimedia terminals for competitive exam aspirants.",
+    sanctioned_amount: 55.0,
+    released_amount: 50.0,
+    expenditure: 36.5,
+    physical_progress: 72.0,
+    status: "Ongoing",
+    completion_date: "2025-01-31",
+    latitude: 12.2958,
+    longitude: 76.6394,
+    risk_level: "Low",
+    anomaly_score: 19.5
+  },
+  // 11. Medium Risk Project
+  {
+    id: 11,
+    work_id: "MPLADS-2024-MH-1255",
+    title: "Farmer Producer Cold Storage & Fruit Grading Center",
+    state: "Maharashtra",
+    district: "Nashik",
+    constituency: "Nashik",
+    mp_name: "Hon. Rajabhau Waje",
+    agency_id: 3,
+    agency_name: "District Rural Development Agency (DRDA)",
+    category: "Public Amenities",
+    description: "100-MT capacity temperature-controlled holding room with automated sorting conveyor belts for smallholder onion and grape farmers.",
+    sanctioned_amount: 65.0,
+    released_amount: 60.0,
+    expenditure: 46.0,
+    physical_progress: 64.0,
+    status: "Ongoing",
+    completion_date: "2025-02-15",
+    latitude: 19.9975,
+    longitude: 73.7898,
+    risk_level: "Medium",
+    anomaly_score: 38.0
+  },
+  // 12. Low Risk Project
+  {
+    id: 12,
+    work_id: "MPLADS-2024-RJ-1366",
+    title: "Government Higher Secondary Science Laboratory Wing",
+    state: "Rajasthan",
+    district: "Udaipur",
+    constituency: "Udaipur",
+    mp_name: "Hon. Manna Lal Rawat",
+    agency_id: 7,
+    agency_name: "Zilla Parishad Engineering Division",
+    category: "Education",
+    description: "Physics, Chemistry, and Biology laboratories equipped with modern optical microscopes, fume hoods, and fire safety systems.",
+    sanctioned_amount: 40.0,
+    released_amount: 40.0,
+    expenditure: 39.1,
+    physical_progress: 100.0,
+    status: "Completed",
+    completion_date: "2024-05-30",
+    latitude: 24.5854,
+    longitude: 73.7125,
+    risk_level: "Low",
+    anomaly_score: 9.0
+  },
+  // 13. Medium Risk Project
+  {
+    id: 13,
+    work_id: "MPLADS-2024-KA-1477",
+    title: "Sub-Urban Drainage & Stormwater Desiltation Canal",
+    state: "Karnataka",
+    district: "Mangaluru",
+    constituency: "Dakshina Kannada",
+    mp_name: "Hon. Brijesh Chowta",
+    agency_id: 2,
+    agency_name: "Public Works Department (PWD)",
+    category: "Sanitation",
+    description: "RCC retaining wall construction along 2.4km stormwater stream to alleviate monsoon flooding in low-lying coastal colonies.",
+    sanctioned_amount: 78.0,
+    released_amount: 75.0,
+    expenditure: 62.0,
+    physical_progress: 80.0,
+    status: "Ongoing",
+    completion_date: "2024-11-15",
+    latitude: 12.9141,
+    longitude: 74.8560,
+    risk_level: "Low",
+    anomaly_score: 28.0
+  },
+  // 14. Low Risk Project
+  {
+    id: 14,
+    work_id: "MPLADS-2024-TN-1588",
+    title: "Community Solar Micro-Grid for Tribal Settlement",
+    state: "Tamil Nadu",
+    district: "The Nilgiris",
+    constituency: "Nilgiris",
+    mp_name: "Hon. A. Raja",
+    agency_id: 5,
+    agency_name: "Tamil Nadu Water Supply & Drainage Board (TWAD)",
+    category: "Public Amenities",
+    description: "40kW off-grid solar installation with battery storage micro-grid supplying uninterrupted clean energy to 85 indigenous households.",
+    sanctioned_amount: 50.0,
+    released_amount: 50.0,
+    expenditure: 47.5,
+    physical_progress: 96.0,
+    status: "Completed",
+    completion_date: "2024-07-15",
+    latitude: 11.4102,
+    longitude: 76.6950,
+    risk_level: "Low",
+    anomaly_score: 11.0
+  },
+  // 15. Low Risk Project
+  {
+    id: 15,
+    work_id: "MPLADS-2024-DL-1699",
+    title: "Maternal & Child Health Care Mobile Outreach Vans (3 Units)",
+    state: "Delhi / Central",
+    district: "East Delhi",
+    constituency: "East Delhi",
+    mp_name: "Hon. Harsh Malhotra",
+    agency_id: 6,
+    agency_name: "National Buildings Construction Corp (NBCC)",
+    category: "Healthcare",
+    description: "Fabrication and medical outfitting of three mobile health clinics with ultrasound equipment and immunization refrigeration.",
+    sanctioned_amount: 95.0,
+    released_amount: 95.0,
+    expenditure: 88.0,
+    physical_progress: 92.0,
+    status: "Ongoing",
+    completion_date: "2024-10-15",
+    latitude: 28.6280,
+    longitude: 77.2950,
+    risk_level: "Low",
+    anomaly_score: 24.0
+  },
+  // 16. Low Risk Project
+  {
+    id: 16,
+    work_id: "MPLADS-2024-RJ-1710",
+    title: "Panchayat Veterinary Dispensary & Livestock Aid Center",
+    state: "Rajasthan",
+    district: "Jodhpur",
+    constituency: "Jodhpur",
+    mp_name: "Hon. Gajendra Singh Shekhawat",
+    agency_id: 7,
+    agency_name: "Zilla Parishad Engineering Division",
+    category: "Healthcare",
+    description: "Veterinary clinical center with surgical theater and cattle vaccination cold chain infrastructure for rural dairy producers.",
+    sanctioned_amount: 35.0,
+    released_amount: 35.0,
+    expenditure: 32.0,
+    physical_progress: 88.0,
+    status: "Ongoing",
+    completion_date: "2024-12-15",
+    latitude: 26.2389,
+    longitude: 73.0243,
+    risk_level: "Low",
+    anomaly_score: 14.0
+  },
+  // 17. Low Risk Project
+  {
+    id: 17,
+    work_id: "MPLADS-2024-MH-1821",
+    title: "Solar Powered Agricultural Feeder Substation Link",
+    state: "Maharashtra",
+    district: "Kolhapur",
+    constituency: "Kolhapur",
+    mp_name: "Hon. Shahu Chhatrapati Maharaj",
+    agency_id: 3,
+    agency_name: "District Rural Development Agency (DRDA)",
+    category: "Roads & Infrastructure",
+    description: "Dedicated 11kV distribution line interconnecting cooperative sugar cane lift irrigation pumps with agricultural substation.",
+    sanctioned_amount: 55.0,
+    released_amount: 50.0,
+    expenditure: 41.5,
+    physical_progress: 78.0,
+    status: "Ongoing",
+    completion_date: "2025-01-20",
+    latitude: 16.7050,
+    longitude: 74.2433,
+    risk_level: "Low",
+    anomaly_score: 21.0
+  },
+  // 18. Low Risk Project
+  {
+    id: 18,
+    work_id: "MPLADS-2024-KA-1932",
+    title: "Gram Panchayat Solid Waste Composting & Segregation Yards",
+    state: "Karnataka",
+    district: "Belagavi",
+    constituency: "Belagavi",
+    mp_name: "Hon. Jagadish Shettar",
+    agency_id: 4,
+    agency_name: "Karnataka Rural Infrastructure Dev Ltd (KRIDL)",
+    category: "Sanitation",
+    description: "Constructed shed, rotary sieve machinery, and vermicomposting pits across 6 panchayat cluster hamlets.",
+    sanctioned_amount: 42.0,
+    released_amount: 40.0,
+    expenditure: 34.0,
+    physical_progress: 85.0,
+    status: "Ongoing",
+    completion_date: "2024-11-25",
+    latitude: 15.8497,
+    longitude: 74.4977,
+    risk_level: "Low",
+    anomaly_score: 17.5
+  }
+];
+
+export const HISTORICAL_SPENDING = [
+  // Project 1 (HERO Critical Anomaly)
+  { project_id: 1, agency_id: 1, month: "January", year: 2024, month_index: 1, actual_expenditure: 35.0, baseline_expenditure: 35.0, cumulative_expenditure: 35.0, velocity_multiplier: 1.0 },
+  { project_id: 1, agency_id: 1, month: "February", year: 2024, month_index: 2, actual_expenditure: 38.0, baseline_expenditure: 38.0, cumulative_expenditure: 73.0, velocity_multiplier: 1.1 },
+  { project_id: 1, agency_id: 1, month: "March", year: 2024, month_index: 3, actual_expenditure: 41.0, baseline_expenditure: 41.0, cumulative_expenditure: 114.0, velocity_multiplier: 1.15 },
+  { project_id: 1, agency_id: 1, month: "April", year: 2024, month_index: 4, actual_expenditure: 44.0, baseline_expenditure: 44.0, cumulative_expenditure: 158.0, velocity_multiplier: 1.2 },
+  { project_id: 1, agency_id: 1, month: "May", year: 2024, month_index: 5, actual_expenditure: 52.0, baseline_expenditure: 44.0, cumulative_expenditure: 210.0, velocity_multiplier: 1.8 },
+  { project_id: 1, agency_id: 1, month: "June", year: 2024, month_index: 6, actual_expenditure: 61.0, baseline_expenditure: 44.0, cumulative_expenditure: 271.0, velocity_multiplier: 2.5 },
+  { project_id: 1, agency_id: 1, month: "July", year: 2024, month_index: 7, actual_expenditure: 71.0, baseline_expenditure: 44.0, cumulative_expenditure: 342.0, velocity_multiplier: 3.4 },
+  { project_id: 1, agency_id: 1, month: "August", year: 2024, month_index: 8, actual_expenditure: 79.0, baseline_expenditure: 44.0, cumulative_expenditure: 421.0, velocity_multiplier: 4.2 },
+
+  // Project 2 (High Risk)
+  { project_id: 2, agency_id: 4, month: "January", year: 2024, month_index: 1, actual_expenditure: 18.0, baseline_expenditure: 20.0, cumulative_expenditure: 18.0, velocity_multiplier: 0.9 },
+  { project_id: 2, agency_id: 4, month: "February", year: 2024, month_index: 2, actual_expenditure: 24.0, baseline_expenditure: 22.0, cumulative_expenditure: 42.0, velocity_multiplier: 1.1 },
+  { project_id: 2, agency_id: 4, month: "March", year: 2024, month_index: 3, actual_expenditure: 28.0, baseline_expenditure: 25.0, cumulative_expenditure: 70.0, velocity_multiplier: 1.2 },
+  { project_id: 2, agency_id: 4, month: "April", year: 2024, month_index: 4, actual_expenditure: 32.0, baseline_expenditure: 28.0, cumulative_expenditure: 102.0, velocity_multiplier: 1.3 },
+  { project_id: 2, agency_id: 4, month: "May", year: 2024, month_index: 5, actual_expenditure: 40.0, baseline_expenditure: 30.0, cumulative_expenditure: 142.0, velocity_multiplier: 1.6 },
+  { project_id: 2, agency_id: 4, month: "June", year: 2024, month_index: 6, actual_expenditure: 49.0, baseline_expenditure: 32.0, cumulative_expenditure: 191.0, velocity_multiplier: 1.9 },
+  { project_id: 2, agency_id: 4, month: "July", year: 2024, month_index: 7, actual_expenditure: 57.0, baseline_expenditure: 34.0, cumulative_expenditure: 248.0, velocity_multiplier: 2.2 },
+  { project_id: 2, agency_id: 4, month: "August", year: 2024, month_index: 8, actual_expenditure: 64.5, baseline_expenditure: 35.0, cumulative_expenditure: 312.5, velocity_multiplier: 2.6 },
+
+  // Project 4 (Medium Risk)
+  { project_id: 4, agency_id: 2, month: "January", year: 2024, month_index: 1, actual_expenditure: 20.0, baseline_expenditure: 22.0, cumulative_expenditure: 20.0, velocity_multiplier: 0.9 },
+  { project_id: 4, agency_id: 2, month: "February", year: 2024, month_index: 2, actual_expenditure: 25.0, baseline_expenditure: 24.0, cumulative_expenditure: 45.0, velocity_multiplier: 1.05 },
+  { project_id: 4, agency_id: 2, month: "March", year: 2024, month_index: 3, actual_expenditure: 30.0, baseline_expenditure: 26.0, cumulative_expenditure: 75.0, velocity_multiplier: 1.15 },
+  { project_id: 4, agency_id: 2, month: "April", year: 2024, month_index: 4, actual_expenditure: 38.0, baseline_expenditure: 28.0, cumulative_expenditure: 113.0, velocity_multiplier: 1.35 },
+  { project_id: 4, agency_id: 2, month: "May", year: 2024, month_index: 5, actual_expenditure: 44.0, baseline_expenditure: 30.0, cumulative_expenditure: 157.0, velocity_multiplier: 1.45 },
+  { project_id: 4, agency_id: 2, month: "June", year: 2024, month_index: 6, actual_expenditure: 50.0, baseline_expenditure: 32.0, cumulative_expenditure: 207.0, velocity_multiplier: 1.55 },
+  { project_id: 4, agency_id: 2, month: "July", year: 2024, month_index: 7, actual_expenditure: 56.0, baseline_expenditure: 35.0, cumulative_expenditure: 263.0, velocity_multiplier: 1.6 },
+  { project_id: 4, agency_id: 2, month: "August", year: 2024, month_index: 8, actual_expenditure: 61.2, baseline_expenditure: 38.0, cumulative_expenditure: 324.2, velocity_multiplier: 1.65 },
+
+  // Project 6 (Low Risk Baseline)
+  { project_id: 6, agency_id: 5, month: "January", year: 2024, month_index: 1, actual_expenditure: 10.0, baseline_expenditure: 10.0, cumulative_expenditure: 10.0, velocity_multiplier: 1.0 },
+  { project_id: 6, agency_id: 5, month: "February", year: 2024, month_index: 2, actual_expenditure: 18.0, baseline_expenditure: 18.0, cumulative_expenditure: 28.0, velocity_multiplier: 1.0 },
+  { project_id: 6, agency_id: 5, month: "March", year: 2024, month_index: 3, actual_expenditure: 27.0, baseline_expenditure: 26.0, cumulative_expenditure: 55.0, velocity_multiplier: 1.04 },
+  { project_id: 6, agency_id: 5, month: "April", year: 2024, month_index: 4, actual_expenditure: 34.0, baseline_expenditure: 33.0, cumulative_expenditure: 89.0, velocity_multiplier: 1.03 },
+  { project_id: 6, agency_id: 5, month: "May", year: 2024, month_index: 5, actual_expenditure: 41.0, baseline_expenditure: 40.0, cumulative_expenditure: 130.0, velocity_multiplier: 1.02 },
+  { project_id: 6, agency_id: 5, month: "June", year: 2024, month_index: 6, actual_expenditure: 48.0, baseline_expenditure: 47.0, cumulative_expenditure: 178.0, velocity_multiplier: 1.02 },
+  { project_id: 6, agency_id: 5, month: "July", year: 2024, month_index: 7, actual_expenditure: 53.0, baseline_expenditure: 52.0, cumulative_expenditure: 231.0, velocity_multiplier: 1.01 },
+  { project_id: 6, agency_id: 5, month: "August", year: 2024, month_index: 8, actual_expenditure: 58.0, baseline_expenditure: 57.0, cumulative_expenditure: 289.0, velocity_multiplier: 1.02 },
+];
+
+export const ANOMALIES = [
+  // Hero Critical Anomaly
+  {
+    id: 1,
+    project_id: 1,
+    agency_id: 1,
+    work_id: "MPLADS-2024-MH-4011",
+    project_title: "Community Health Center Modernization & Trauma Care Unit",
+    agency_name: "State Police Housing & Welfare Corporation",
+    category: "Healthcare",
+    state: "Maharashtra",
+    district: "Pune",
+    current_expenditure: 79.0,
+    historical_baseline: 44.0,
+    z_score: 3.7,
+    iqr_status: "Flagged",
+    spending_velocity: 4.2,
+    historical_deviation: 79.5,
+    anomaly_score: 92.0,
+    risk_level: "Critical",
+    score_components: {
+      z_score_weighted: 28.5,
+      iqr_weighted: 20.0,
+      velocity_weighted: 28.0,
+      deviation_weighted: 15.5,
+      weights: { z_score: 0.30, iqr: 0.20, velocity: 0.30, deviation: 0.20 }
+    },
+    reason: "Current expenditure is substantially above the historical agency baseline. The Z-score exceeds the configured threshold, the value is outside the IQR range, and recent spending velocity is significantly higher than the historical average."
+  },
+  {
+    id: 2,
+    project_id: 2,
+    agency_id: 4,
+    work_id: "MPLADS-2024-KA-1082",
+    project_title: "Solar-Powered Drinking Water Grid & RO Purification Hub",
+    agency_name: "Karnataka Rural Infrastructure Dev Ltd (KRIDL)",
+    category: "Water Supply",
+    state: "Karnataka",
+    district: "Bengaluru Rural",
+    current_expenditure: 64.5,
+    historical_baseline: 35.0,
+    z_score: 2.85,
+    iqr_status: "Flagged",
+    spending_velocity: 2.6,
+    historical_deviation: 84.3,
+    anomaly_score: 76.5,
+    risk_level: "High",
+    score_components: {
+      z_score_weighted: 23.5,
+      iqr_weighted: 20.0,
+      velocity_weighted: 17.5,
+      deviation_weighted: 15.5,
+      weights: { z_score: 0.30, iqr: 0.20, velocity: 0.30, deviation: 0.20 }
+    },
+    reason: "Unusual acceleration detected in municipal water installation. Current expenditure diverges +84.3% from historical baseline, with spending velocity reaching 2.6× historical rate."
+  },
+  {
+    id: 3,
+    project_id: 3,
+    agency_id: 1,
+    work_id: "MPLADS-2024-MH-2034",
+    project_title: "Smart Anganwadi & Early Childhood Nutrition Resource Hubs",
+    agency_name: "State Police Housing & Welfare Corporation",
+    category: "Education",
+    state: "Maharashtra",
+    district: "Nagpur",
+    current_expenditure: 51.0,
+    historical_baseline: 26.0,
+    z_score: 2.64,
+    iqr_status: "Flagged",
+    spending_velocity: 2.3,
+    historical_deviation: 96.2,
+    anomaly_score: 68.0,
+    risk_level: "High",
+    score_components: {
+      z_score_weighted: 21.0,
+      iqr_weighted: 20.0,
+      velocity_weighted: 14.5,
+      deviation_weighted: 12.5,
+      weights: { z_score: 0.30, iqr: 0.20, velocity: 0.30, deviation: 0.20 }
+    },
+    reason: "High variance flagged in educational center digitization disbursements. Spending is 96.2% above baseline with repeated multi-voucher batches."
+  },
+  {
+    id: 4,
+    project_id: 4,
+    agency_id: 2,
+    work_id: "MPLADS-2024-KA-3045",
+    project_title: "Bridge & Approach Road Over Vrishabhavathi Channel",
+    agency_name: "Public Works Department (PWD)",
+    category: "Roads & Infrastructure",
+    state: "Karnataka",
+    district: "Bengaluru Urban",
+    current_expenditure: 61.2,
+    historical_baseline: 38.0,
+    z_score: 2.15,
+    iqr_status: "Normal",
+    spending_velocity: 1.65,
+    historical_deviation: 61.0,
+    anomaly_score: 54.0,
+    risk_level: "Medium",
+    score_components: {
+      z_score_weighted: 16.5,
+      iqr_weighted: 0.0,
+      velocity_weighted: 15.0,
+      deviation_weighted: 12.5,
+      weights: { z_score: 0.30, iqr: 0.20, velocity: 0.30, deviation: 0.20 }
+    },
+    reason: "Moderate baseline deviation observed in bridge culvert approach spending. Z-score (2.15) exceeds normal variance envelope; physical verification recommended."
+  },
+  {
+    id: 5,
+    project_id: 5,
+    agency_id: 6,
+    work_id: "MPLADS-2024-DL-5099",
+    project_title: "Vocational Skill Training Complex & Digital Computer Lab",
+    agency_name: "National Buildings Construction Corp (NBCC)",
+    category: "Education",
+    state: "Delhi / Central",
+    district: "New Delhi",
+    current_expenditure: 94.0,
+    historical_baseline: 65.0,
+    z_score: 1.95,
+    iqr_status: "Normal",
+    spending_velocity: 1.45,
+    historical_deviation: 44.6,
+    anomaly_score: 48.5,
+    risk_level: "Medium",
+    score_components: {
+      z_score_weighted: 15.0,
+      iqr_weighted: 0.0,
+      velocity_weighted: 13.5,
+      deviation_weighted: 10.0,
+      weights: { z_score: 0.30, iqr: 0.20, velocity: 0.30, deviation: 0.20 }
+    },
+    reason: "Moderate spend acceleration (+44.6% deviation) noted during terminal equipment procurement phase."
+  },
+  {
+    id: 6,
+    project_id: 11,
+    agency_id: 3,
+    work_id: "MPLADS-2024-MH-1255",
+    project_title: "Farmer Producer Cold Storage & Fruit Grading Center",
+    agency_name: "District Rural Development Agency (DRDA)",
+    category: "Public Amenities",
+    state: "Maharashtra",
+    district: "Nashik",
+    current_expenditure: 46.0,
+    historical_baseline: 35.0,
+    z_score: 1.45,
+    iqr_status: "Normal",
+    spending_velocity: 1.3,
+    historical_deviation: 31.4,
+    anomaly_score: 38.0,
+    risk_level: "Medium",
+    score_components: {
+      z_score_weighted: 12.0,
+      iqr_weighted: 0.0,
+      velocity_weighted: 10.0,
+      deviation_weighted: 6.0,
+      weights: { z_score: 0.30, iqr: 0.20, velocity: 0.30, deviation: 0.20 }
+    },
+    reason: "Minor velocity increase noted during cold chain machinery acquisition. Routine monitoring maintained."
+  },
+  {
+    id: 7,
+    project_id: 13,
+    agency_id: 2,
+    work_id: "MPLADS-2024-KA-1477",
+    project_title: "Sub-Urban Drainage & Stormwater Desiltation Canal",
+    agency_name: "Public Works Department (PWD)",
+    category: "Sanitation",
+    state: "Karnataka",
+    district: "Mangaluru",
+    current_expenditure: 62.0,
+    historical_baseline: 48.0,
+    z_score: 1.35,
+    iqr_status: "Normal",
+    spending_velocity: 1.25,
+    historical_deviation: 29.1,
+    anomaly_score: 28.0,
+    risk_level: "Low",
+    score_components: {
+      z_score_weighted: 8.0,
+      iqr_weighted: 0.0,
+      velocity_weighted: 6.0,
+      deviation_weighted: 4.0,
+      weights: { z_score: 0.30, iqr: 0.20, velocity: 0.30, deviation: 0.20 }
+    },
+    reason: "Spend profile remains within acceptable tolerance limits for seasonal canal desiltation works."
+  }
+];
+
+export const VERIFICATION_CASES = [
+  // Case for Hero Project 1
+  {
+    id: 1,
+    case_id: "VER-2024-MH-001",
+    project_id: 1,
+    agency_id: 1,
+    anomaly_id: 1,
+    work_id: "MPLADS-2024-MH-4011",
+    project_title: "Community Health Center Modernization & Trauma Care Unit",
+    agency_name: "State Police Housing & Welfare Corporation",
+    anomaly_score: 92.0,
+    risk_level: "Critical",
+    status: "Under Review",
+    reviewer: "Dr. Aniruddha Kulkarni, District Nodal Auditor",
+    comment: "Rapid spike of ₹35L in 60 days flagged by statistical model. Discrepancy observed between 48% physical structural progress and 83% financial utilization. Physical milestone audit initiated.",
+    remarks: "Interim inspection team dispatched to Pune site. Contractor requested to supply itemized procurement invoices for ICU diagnostic machinery.",
+    submitted_date: "2024-08-12T10:30:00Z",
+    updated_at: "2024-08-14T15:00:00Z",
+    evidence_count: 2
+  },
+  {
+    id: 2,
+    case_id: "VER-2024-KA-002",
+    project_id: 2,
+    agency_id: 4,
+    anomaly_id: 2,
+    work_id: "MPLADS-2024-KA-1082",
+    project_title: "Solar-Powered Drinking Water Grid & RO Purification Hub",
+    agency_name: "Karnataka Rural Infrastructure Dev Ltd (KRIDL)",
+    anomaly_score: 76.5,
+    risk_level: "High",
+    status: "Submitted",
+    reviewer: "P. Ramesh Rao, Zilla Panchayat Vigilance Officer",
+    comment: "Disbursement velocity accelerated to 2.6x against historical average. RO plant machinery cost claims require physical delivery confirmation.",
+    remarks: "Case opened following automated anomaly engine trigger. Awaiting field inspector assignment.",
+    submitted_date: "2024-08-15T14:20:00Z",
+    updated_at: "2024-08-15T14:20:00Z",
+    evidence_count: 0
+  },
+  {
+    id: 3,
+    case_id: "VER-2024-MH-003",
+    project_id: 3,
+    agency_id: 1,
+    anomaly_id: 3,
+    work_id: "MPLADS-2024-MH-2034",
+    project_title: "Smart Anganwadi & Early Childhood Nutrition Resource Hubs",
+    agency_name: "State Police Housing & Welfare Corporation",
+    anomaly_score: 68.0,
+    risk_level: "High",
+    status: "Verified",
+    reviewer: "Sunita Deshmukh, Chief Accounts Officer",
+    comment: "Audit completed. Sudden expenditure surge of ₹22L was verified against authorized advance payment for centralized bulk purchase of computer hardware and solar units under state educational mandate.",
+    remarks: "Field engineer submitted geocoded photos and OEM delivery challans. Spending justified by sanctioned milestone variation order.",
+    submitted_date: "2024-07-20T11:00:00Z",
+    updated_at: "2024-07-25T16:30:00Z",
+    evidence_count: 1
+  },
+  {
+    id: 4,
+    case_id: "VER-2024-KA-004",
+    project_id: 4,
+    agency_id: 2,
+    anomaly_id: 4,
+    work_id: "MPLADS-2024-KA-3045",
+    project_title: "Bridge & Approach Road Over Vrishabhavathi Channel",
+    agency_name: "Public Works Department (PWD)",
+    anomaly_score: 54.0,
+    risk_level: "Medium",
+    status: "Rejected",
+    reviewer: "Harish Gowda, Divisional Technical Officer",
+    comment: "Supplementary bill claim of ₹14.2L rejected due to duplicate material billing and absence of valid cubic-meter concrete test certifications.",
+    remarks: "Agency directed to rectify measurement book entry. Payment withheld until compliance.",
+    submitted_date: "2024-06-18T16:45:00Z",
+    updated_at: "2024-06-22T10:15:00Z",
+    evidence_count: 0
+  },
+  {
+    id: 5,
+    case_id: "VER-2024-DL-005",
+    project_id: 5,
+    agency_id: 6,
+    anomaly_id: 5,
+    work_id: "MPLADS-2024-DL-5099",
+    project_title: "Vocational Skill Training Complex & Digital Computer Lab",
+    agency_name: "National Buildings Construction Corp (NBCC)",
+    anomaly_score: 48.5,
+    risk_level: "Medium",
+    status: "Resolved",
+    reviewer: "Vikas Sharma, Directorate of Audit",
+    comment: "Verification concluded. All 60 computer terminals and solar inverter installations verified on-site. Inventory register reconciled.",
+    remarks: "Final completion certificate issued. Case closed successfully.",
+    submitted_date: "2024-05-25T09:15:00Z",
+    updated_at: "2024-06-05T12:00:00Z",
+    evidence_count: 0
+  }
+];
+
+export const EVIDENCE = [
+  {
+    id: 1,
+    verification_id: 1,
+    file_name: "pune_trauma_icu_wing_foundation_audit.jpg",
+    file_hash: "8f4e2b10a9c4d3e5f7a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3",
+    file_url: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80",
+    latitude: 18.5204,
+    longitude: 73.8567,
+    timestamp: "2024-08-14T11:45:00Z",
+    comment: "Site inspection photo of ICU block: RCC framework partially complete (48%), interior partitions and medical gas pipeline installation pending.",
+    is_verified: true
+  },
+  {
+    id: 2,
+    verification_id: 1,
+    file_name: "trauma_diagnostic_equipment_challan.pdf",
+    file_hash: "3a7b9c1d2e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b",
+    file_url: "https://images.unsplash.com/photo-1586772008403-1288544c2eb5?auto=format&fit=crop&w=800&q=80",
+    latitude: 18.5204,
+    longitude: 73.8567,
+    timestamp: "2024-08-14T12:10:00Z",
+    comment: "Supplier invoice #MED-2024-998 submitted by executing agency; currently awaiting serial number verification against warehouse ledger.",
+    is_verified: true
+  },
+  {
+    id: 3,
+    verification_id: 3,
+    file_name: "nagpur_anganwadi_digitization_tablets_delivered.jpg",
+    file_hash: "9b8a7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b",
+    file_url: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
+    latitude: 21.1458,
+    longitude: 79.0882,
+    timestamp: "2024-07-22T14:30:00Z",
+    comment: "Delivery verification photo confirming 60 interactive learning tablets and solar charging docking stations at Model Anganwadi center.",
+    is_verified: true
+  }
+];
+
+export const DATA_QUALITY = {
+  rows_imported: 18,
+  rows_processed: 18,
+  missing_fields: 0,
+  duplicate_records: 0,
+  invalid_dates: 0,
+  invalid_amounts: 0,
+  normalized_agencies: 7,
+  import_timestamp: "2024-08-15T10:00:00Z",
+  data_source: "MPLADS Integrated State Monitoring Cell (Demo Baseline)",
+  status: "Healthy",
+  recent_logs: [
+    {
+      id: 1,
+      filename: "mplads_master_expenditure_dataset_q2_2024.csv",
+      source: "MPLADS Integrated State Monitoring Cell",
+      rows_imported: 18,
+      rows_processed: 18,
+      missing_fields: 0,
+      duplicate_records: 0,
+      normalized_agencies: 7,
+      status: "Success",
+      timestamp: "2024-08-15T10:00:00Z"
+    }
+  ]
+};
+
+export const SETTINGS = {
+  z_score_threshold: 3.0,
+  iqr_multiplier: 1.5,
+  weight_zscore: 0.30,
+  weight_iqr: 0.20,
+  weight_velocity: 0.30,
+  weight_deviation: 0.20
+};
+
+// DYNAMIC AGGREGATION HELPERS
+export function getDashboardSummary() {
+  const total_projects = PROJECTS.length;
+  const total_expenditure = parseFloat(PROJECTS.reduce((sum, p) => sum + p.expenditure, 0).toFixed(2));
+  const agencies_analysed = AGENCIES.length;
+  const high_critical_anomalies = ANOMALIES.filter(a => a.risk_level === "Critical" || a.risk_level === "High").length;
+  const cases_under_verification = VERIFICATION_CASES.filter(v => v.status === "Submitted" || v.status === "Under Review").length;
+  
+  // Spending trend across 8 months
+  const months_order = ["January", "February", "March", "April", "May", "June", "July", "August"];
+  const spending_trend = months_order.map(m => {
+    const recs = HISTORICAL_SPENDING.filter(h => h.month === m);
+    const actual = recs.reduce((acc, r) => acc + r.actual_expenditure, 0);
+    const baseline = recs.reduce((acc, r) => acc + r.baseline_expenditure, 0);
+    const cumulative = recs.reduce((acc, r) => acc + r.cumulative_expenditure, 0);
+    return {
+      month: m,
+      month_short: m.substring(0, 3),
+      actual: parseFloat(actual.toFixed(1)),
+      baseline: parseFloat(baseline.toFixed(1)),
+      cumulative: parseFloat(cumulative.toFixed(1))
+    };
+  });
+
+  const anomaly_distribution = {
+    Low: ANOMALIES.filter(a => a.risk_level === "Low").length,
+    Medium: ANOMALIES.filter(a => a.risk_level === "Medium").length,
+    High: ANOMALIES.filter(a => a.risk_level === "High").length,
+    Critical: ANOMALIES.filter(a => a.risk_level === "Critical").length,
+  };
+
+  const verification_status_distribution = {
+    Submitted: VERIFICATION_CASES.filter(v => v.status === "Submitted").length,
+    "Under Review": VERIFICATION_CASES.filter(v => v.status === "Under Review").length,
+    Verified: VERIFICATION_CASES.filter(v => v.status === "Verified").length,
+    Rejected: VERIFICATION_CASES.filter(v => v.status === "Rejected").length,
+    Resolved: VERIFICATION_CASES.filter(v => v.status === "Resolved").length,
+  };
+
+  const priority_anomalies = [...ANOMALIES].sort((a, b) => b.anomaly_score - a.anomaly_score).slice(0, 5);
+
+  return {
+    total_projects,
+    total_expenditure,
+    agencies_analysed,
+    high_critical_anomalies,
+    cases_under_verification,
+    priority_anomalies,
+    spending_trend,
+    anomaly_distribution,
+    verification_status_distribution
+  };
+}
